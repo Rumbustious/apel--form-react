@@ -79,7 +79,7 @@ function App() {
               required
               placeholder="English Fullname"
             />
-            <p className="error-msg">{}errors.name?.message</p>
+            <p className="error-msg">{errors.name?.message}</p>
           </div>
           <div className="grid-item">
             <label>E-mail</label>
