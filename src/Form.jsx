@@ -17,7 +17,12 @@ function App() {
   // handle typing in fields
   function handleChange(event) {
     const { name, value, maxLength } = event.target;
-    if (value.length <= maxLength) {
+    console.log(name)
+    if (
+      value.length <= maxLength ||
+      name !== "phoneNumber" &&
+      name !== "nationalId"
+    ) {
       setFormData((prevFormData) => {
         return {
           ...prevFormData,
