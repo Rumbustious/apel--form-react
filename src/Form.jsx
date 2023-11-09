@@ -1,48 +1,66 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import apelLogo from "./assets/apel.svg";
 
 function App() {
   // state of the form's data
   const [formData, setFormData] = useState({
-    arabicName: "",
-    name: "",
+    teamName: "",
+    arName: "",
+    enName: "",
     email: "",
     phoneNumber: "",
     nationalId: "",
     university: "",
     academicYear: "",
-    gender: "",
   });
-
-  // handle fields change
+  const [validationErrors, setValidationErrors] = useState({});
+  // handle typing in fields
   function handleChange(event) {
-    const { name, value, type, checked } = event.target;
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [name]: type === "checkbox" ? checked : value,
-      };
-    });
+    const { name, value, maxLength } = event.target;
+    if (value.length <= maxLength) {
+      setFormData((prevFormData) => {
+        return {
+          ...prevFormData,
+          [name]: value,
+        };
+      });
+    }
+  }
+  // checkvalidation
+  function preValidate(formData) {
+    const teamNameRegx = /\w|^[ء-ي ]*$/;
+    const arNameRegx = /[ء-ي ] [ء-ي ]/g;
+    const enNameRegx = /[a-zA-Z ] [a-zA-Z ]/g;
+    const emailRegx = /\w@(gmail|yahoo).com/g;
+    const phoneRegx = /01(0|1|2|5)\d{8}/g;
+    const idRegx = /(2|3)\d{6}28\d{5}/g;
+
+    if (!teamNameRegx.test(formData.teamName)) {
+      console.log("invalid team name");
+    }
+    if (!arNameRegx.test(formData.arName)) {
+      console.log("invalid arabic name");
+    }
+    if (!enNameRegx.test(formData.enName)) {
+      console.log("invalid english name");
+    }
+    if (!emailRegx.test(formData.email)) {
+      console.log("invalid email");
+    }
+    if (!phoneRegx.test(formData.phoneNumber)) {
+      console.log("invalid number");
+    }
+    if (!phoneRegx.test(formData.phoneNumber)) {
+      console.log("invalid number");
+    }
+  }
+  // handle form submition
+  function handleSubmit(event) {
+    event.preventDefault();
+    preValidate(formData);
+    console.log(formData);
   }
 
-  // typescript
-  // type formVals {
-  //   name: String,
-  //   email: String,
-  // }
-
-  const form = useForm();
-  // const form = useForm<formVals>();
-  const { register, control, handleSubmit, formState } = form;
-  const errors = formState;
-  // const { name, ref, onChange, onBlur } = register("name");
-
-  // handle submite button
-  function onSubmit(data) {
-    console.log(data);
-  }
   return (
     <main className="main">
       <a href="">
@@ -52,127 +70,109 @@ function App() {
           className="apel-logo"
         />
       </a>
-      <form
-        className="form-container"
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
-        <div className="grid">
+      <form className="form-container" onSubmit={handleSubmit}>
+        <div className="grid" dir="rtl">
+          <div className="grid-item">
+            <label>اسم الفريق</label>
+            <input
+              name="teamName"
+              type="text"
+              placeholder="اكتب اسم الفريق"
+              required
+              value={formData.teamName}
+              onChange={handleChange}
+            ></input>
+          </div>
           <div className="grid-item">
             <label>الاسم الكامل بالعربية</label>
             <input
-              name="arabicName"
-              dir="rtl"
+              name="arName"
               type="text"
+              placeholder="اكتب اسمك بالعربية"
               required
-              placeholder="الاسم بالعربية"
-              value={formData.arabicName}
+              value={formData.arName}
               onChange={handleChange}
             />
           </div>
           <div className="grid-item">
-            <label>English Fullname</label>
+            <label>الاسم الكامل بالإنجليزية</label>
             <input
-              id="name"
-              {...register("name", { required: "Username is required" })}
+              name="enName"
               type="text"
+              placeholder="اكتب اسمك بالإنجليزية"
               required
-              placeholder="English Fullname"
+              value={formData.enName}
+              onChange={handleChange}
             />
-            <p className="error-msg">{errors.name?.message}</p>
           </div>
           <div className="grid-item">
-            <label>E-mail</label>
+            <label>البريدالإلكتروني</label>
             <input
-              {...register("email", {
-                pattern: {
-                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: "Invalid mail format",
-                },
-              })}
+              name="email"
+              type="email"
+              placeholder="اكتب بريدك الإلكتروني"
               required
-              placeholder="Email"
               value={formData.email}
+              onChange={handleChange}
             />
           </div>
           <div className="grid-item">
-            <label>Phone Number</label>
+            <label>رقم الهاتف</label>
             <input
               name="phoneNumber"
-              required
               type="number"
-              placeholder="phone Number"
+              placeholder="اكتب رقم هاتفك"
+              required
+              maxLength={11}
               value={formData.phoneNumber}
               onChange={handleChange}
             />
           </div>
           <div className="grid-item">
-            <label>National ID</label>
+            <label>الرقم القومي</label>
             <input
-              type="number"
               name="nationalId"
+              type="number"
+              placeholder="اكتب رقمك القومي"
               required
-              placeholder="National ID"
+              // onInput={   }
+              maxLength={14}
               value={formData.nationalId}
               onChange={handleChange}
             />
           </div>
           <div className="grid-item">
-            <label>Univeristy</label>
+            <label>الجامعة</label>
             <select
               name="university"
+              required
               value={formData.university}
               onChange={handleChange}
             >
-              <option value="">Select an option</option>
-              <option value="Aswan">Aswan</option>
-              <option value="Assuit">Assuit</option>
-              <option value="Cairo">Cairo</option>
+              <option value="">اختر جامعتك</option>
+              <option value="أسوان">أسوان</option>
             </select>
           </div>
           <div className="grid-item">
-            <label>Academic Year</label>
+            <label>السنة الدراسية</label>
             <select
               name="academicYear"
               required
               value={formData.academicYear}
               onChange={handleChange}
             >
-              <option value="-">Select an option</option>
-              <option value="prep">prep</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
+              <option value="-">اختر سنة دراسية</option>
+              <option value="الإعدادية">الإعدادية</option>
+              <option value="الأولي">الأولي</option>
+              <option value="الثانية">الثانية</option>
+              <option value="الثالثة">الثالثة</option>
+              <option value="الرابعة">الرابعة</option>
             </select>
           </div>
-          <fieldset id="gender-field">
-            <legend>Gender</legend>
-            <div>
-              <label htmlFor="">Male</label>
-              <input
-                type="radio"
-                name="gender"
-                value="male"
-                checked={formData.gender === "male"}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="">Female</label>
-              <input
-                type="radio"
-                name="gender"
-                value="female"
-                checked={formData.gender === "female"}
-                onChange={handleChange}
-              />
-            </div>
-          </fieldset>
-          <button className="submit-btn">Submit</button>
+
+          <button className="submit-btn">أرسل</button>
         </div>
       </form>
-      <DevTool control={control} />
     </main>
   );
 }

@@ -13,7 +13,11 @@
   );
   --grid-background: 0 0% 96%;
 }
-
+/* font-used */
+@font-face {
+  font-family: ejaza;
+  src: url(./assets/ejaza-font.TTF);
+}
 /* Andy-Bell CSS Reset */
 /* Box sizing rules */
 *,
@@ -50,7 +54,7 @@ html:focus-within {
 /* Set core body defaults */
 body {
   color: hsl(var(--font-color));
-  font-family: "Cairo", sans-serif;
+  font-family: "ejaza", sans-serif;
   background: var(--main-background);
   min-height: 100vh;
   text-rendering: optimizeSpeed;
@@ -100,7 +104,6 @@ select {
   flex-direction: column;
   justify-content: center;
   padding-bottom: 5rem;
-
 }
 .apel-logo {
   margin-inline: auto;
@@ -114,7 +117,7 @@ select {
   width: 80%;
   padding: 2rem;
   margin-inline: auto;
-  font-size: 20px;
+  font-size: 2rem;
   /* color: white; */
 }
 label {
@@ -124,7 +127,6 @@ label {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
-
 }
 .grid-item {
   display: flex;
@@ -155,7 +157,7 @@ select {
   background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
   background-repeat: no-repeat;
   background-size: 2.5rem;
-  background-position: 95% 50%;
+  background-position: 5% 50%;
 }
 option {
   background-color: rgb(36, 36, 36);
