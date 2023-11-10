@@ -162,27 +162,7 @@ select {
 option {
   background-color: rgb(36, 36, 36);
 }
-#gender-field {
-  color: hsl(var(--font-color));
-  /* accent-color: green; */
-  border: hsl(var(--light-blue)) 1px solid;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-}
-#gender-field div {
-  display: flex;
-  flex-direction: row;
-  justify-self: center;
-  align-self: center;
-}
-#gender-field input {
-  width: 1rem;
-  height: 1rem;
-  justify-self: center;
-  align-self: center;
-}
+
 .submit-btn {
   border: none;
   border-radius: 10px;
@@ -192,18 +172,13 @@ option {
   align-self: center;
   color: white;
   background-color: hsl(var(--primary-orange));
-  /* background-color: hsl(121 98% 33% / 0.7); */
 }
 .submit-btn:hover {
   background-color: hsl(var(--primary-orange) / 0.9);
   cursor: pointer;
 }
-.error-msg {
-  color: rgb(255, 70, 70);
-  font-size: 1rem;
-}
-.field-error {
-  border: 1px solid red;
+.grid .error {
+  border: hsl(var(--primary-orange)) 2px solid;
 }
 
 @media screen and (max-width: 500px) {
