@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import apelLogo from "./assets/apel.svg";
+import InputField from "./components/InputField.jsx";
 function App() {
   // state of the form's data
   const [formData, setFormData] = useState({
@@ -128,143 +129,105 @@ function App() {
         <div className="grid" dir="rtl">
           <div className="grid-item">
             <label>اسم الفريق</label>
-            <input
+
+            <InputField
               name="teamName"
               type="text"
-              placeholder="اكتب اسم الفريق"
-              required
-              value={formData.teamName}
-              onChange={handleChange}
-              className={
-                validationErrors.teamName && focusedFields.includes("teamName")
-                  ? "error"
-                  : ""
-              }
-            ></input>
+              placeholderMsg="اكتب اسم الفريق"
+              formData={formData}
+              handleChange={handleChange}
+              validationErrors={validationErrors}
+              focusedFields={focusedFields}
+            />
           </div>
           <div className="grid-item">
             <label>الاسم الكامل بالعربية</label>
-            <input
+            <InputField
               name="arName"
               type="text"
-              placeholder="اكتب اسمك بالعربية"
-              required
-              value={formData.arName}
-              onChange={handleChange}
-              className={
-                validationErrors.arName && focusedFields.includes("arName")
-                  ? "error"
-                  : ""
-              }
+              placeholderMsg="اكتب اسمك بالعربية"
+              formData={formData}
+              handleChange={handleChange}
+              validationErrors={validationErrors}
+              focusedFields={focusedFields}
             />
           </div>
           <div className="grid-item">
             <label>الاسم الكامل بالإنجليزية</label>
-            <input
+            <InputField
               name="enName"
               type="text"
-              placeholder="اكتب اسمك بالإنجليزية"
-              required
-              value={formData.enName}
-              onChange={handleChange}
-              className={
-                validationErrors.enName && focusedFields.includes("enName")
-                  ? "error"
-                  : ""
-              }
+              placeholderMsg="اكتب اسمك بالإنجليزية"
+              formData={formData}
+              handleChange={handleChange}
+              validationErrors={validationErrors}
+              focusedFields={focusedFields}
             />
           </div>
           <div className="grid-item">
             <label>البريدالإلكتروني</label>
-            <input
+            <InputField
               name="email"
               type="email"
-              placeholder="اكتب بريدك الإلكتروني"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className={
-                validationErrors.email && focusedFields.includes("email")
-                  ? "error"
-                  : ""
-              }
+              placeholderMsg="اكتب بريدك الإلكتروني"
+              formData={formData}
+              handleChange={handleChange}
+              validationErrors={validationErrors}
+              focusedFields={focusedFields}
             />
           </div>
           <div className="grid-item">
             <label>رقم الهاتف</label>
-            <input
+            <InputField
               name="phoneNumber"
               type="number"
-              placeholder="اكتب رقم هاتفك"
-              required
-              maxLength={11}
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              className={
-                validationErrors.phoneNumber &&
-                focusedFields.includes("phoneNumber")
-                  ? "error"
-                  : ""
-              }
+              placeholderMsg="اكتب رقم هاتفك"
+              max={11}
+              formData={formData}
+              handleChange={handleChange}
+              validationErrors={validationErrors}
+              focusedFields={focusedFields}
             />
           </div>
           <div className="grid-item">
             <label>الرقم القومي</label>
-            <input
+            <InputField
               name="nationalId"
               type="number"
-              placeholder="اكتب رقمك القومي"
-              required
-              maxLength={14}
-              value={formData.nationalId}
-              onChange={handleChange}
-              className={
-                validationErrors.nationalId &&
-                focusedFields.includes("nationalId")
-                  ? "error"
-                  : ""
-              }
+              placeholderMsg="اكتب رقمك القومي"
+              max={14}
+              formData={formData}
+              handleChange={handleChange}
+              validationErrors={validationErrors}
+              focusedFields={focusedFields}
             />
           </div>
           <div className="grid-item">
             <label>الجامعة</label>
-            <select
+            <InputField
               name="university"
-              required
-              value={formData.university}
-              onChange={handleChange}
-              className={
-                validationErrors.university &&
-                focusedFields.includes("university")
-                  ? "error"
-                  : ""
-              }
-            >
-              <option value="">اختر جامعتك</option>
-              <option value="أسوان">أسوان</option>
-            </select>
+              type="select"
+              placeholderMsg="اختر جامعتك"
+              formData={formData}
+              handleChange={handleChange}
+              validationErrors={validationErrors}
+              focusedFields={focusedFields}
+              options={["أسوان", "القاهرة"]}
+            />
           </div>
           <div className="grid-item">
             <label>السنة الدراسية</label>
-            <select
+
+            <InputField
               name="academicYear"
-              required
-              value={formData.academicYear}
-              onChange={handleChange}
-              className={
-                validationErrors.teamName &&
-                focusedFields.includes("academicYear")
-                  ? "error"
-                  : ""
-              }
-            >
-              <option value="-">اختر سنة دراسية</option>
-              <option value="الإعدادية">الإعدادية</option>
-              <option value="الأولي">الأولي</option>
-              <option value="الثانية">الثانية</option>
-              <option value="الثالثة">الثالثة</option>
-              <option value="الرابعة">الرابعة</option>
-            </select>
+              type="select"
+              placeholderMsg="اختر سنة دراسية"
+              formData={formData}
+              handleChange={handleChange}
+              validationErrors={validationErrors}
+              focusedFields={focusedFields}
+              options={["الإعدادية", "الأولي", "الثانية", "الثالثة", "الرابعة"]}
+            />
           </div>
 
           <button className="submit-btn">أرسل</button>
