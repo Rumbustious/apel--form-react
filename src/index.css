@@ -144,7 +144,6 @@ label {
   height: 3.3rem;
   background-color: transparent;
   color: hsl(var(--dark-blue));
-  /* color: whitesmoke; */
   padding: 0.2rem 1rem;
 }
 .grid input::placeholder {
@@ -177,8 +176,10 @@ option {
   background-color: hsl(var(--primary-orange) / 0.9);
   cursor: pointer;
 }
-.grid .error {
-  border: hsl(var(--primary-orange)) 2px solid;
+.grid .error,
+.grid .error:focus {
+  outline: none;
+  border: hsl(var(--primary-orange)) 3px solid;
 }
 
 @media screen and (max-width: 500px) {
